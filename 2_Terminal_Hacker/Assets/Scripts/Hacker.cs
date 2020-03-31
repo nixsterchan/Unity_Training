@@ -61,66 +61,99 @@ public class Hacker : MonoBehaviour
 
     void RunMainMenu(string input)
     {
-
-        if (input == "1")
+        bool isValidLevel = (input == "1" || input == "2" || input == "3");
+        if (isValidLevel)
         {
-            level = 1;
-            var random = new System.Random();
-            int index = random.Next(level1Passwords.Length);
-
-            password = level1Passwords[index];
-            StartGame();
-        }
-        else if (input == "2")
-        {
-            level = 2;
-            var random = new System.Random();
-            int index = random.Next(level2Passwords.Length);
-
-            password = level2Passwords[index];
-            StartGame();
-        }
-        else if (input == "3")
-        {
-            level = 3;
-            var random = new System.Random();
-            int index = random.Next(level3Passwords.Length);
-
-            password = level3Passwords[index];
-            password = "tanjirou";
-            StartGame();
-        }
-        else if (input == "menu")
-        {
-            ShowMainMenu();
+            level = int.Parse(input);
+            AskForPassword();
         }
         else
         {
-            Terminal.WriteLine("Please enter a valid input");
+            Terminal.WriteLine("Please enter a valid input!");
         }
+
+        
     }
 
-    void StartGame()
+    void AskForPassword()
     {
         currentScreen = Screen.Password;
+        Terminal.ClearScreen();
         Terminal.WriteLine("Welcome to level " + level);
-        Terminal.WriteLine("Please enter your password guess: ");
+        SetRandomPassword();
+        Terminal.WriteLine("Enter your guess: " + password.Anagram());
+    }
+
+    void SetRandomPassword()
+    {
+        var random = new System.Random();
+        switch (level)
+        {
+            case 1:
+                password = level1Passwords[random.Next(level1Passwords.Length)];
+                break;
+            case 2:
+                password = level2Passwords[random.Next(level2Passwords.Length)];
+                break;
+            case 3:
+                password = level3Passwords[random.Next(level3Passwords.Length)];
+                break;
+            default:
+                Debug.Log("Invalid Level reached");
+                break;
+        }
     }
 
     void HandlePassword(string input)
     {
         if (input == password)
         {
-            currentScreen = Screen.Win;
-            Terminal.WriteLine("Congratulations, you just got the right password!");
-            Terminal.WriteLine("To return to the main menu to try other levels, type 'menu'");
+            DisplayWinScreen();
         }
         else
         {
             Terminal.WriteLine("The input was incorrect, please try again (:");
         }
     }
-    
+
+    void DisplayWinScreen()
+    {
+        currentScreen = Screen.Win;
+        Terminal.ClearScreen();
+        ShowLevelReward();
+    }
+
+    void ShowLevelReward()
+    {
+        switch (level)
+        {
+            case 1:
+                Terminal.WriteLine("Congratulations, you just got the right password!");
+                Terminal.WriteLine("To return to the main menu to try other levels, type 'menu'");
+                break;
+            case 2:
+                Terminal.WriteLine("Congratulations!");
+                Terminal.WriteLine("Here have a book");
+                Terminal.WriteLine(@"
+    _______
+   /      //
+  /      //
+ /_____ //
+(______(/
+                ");
+                Terminal.WriteLine("To return to the main menu to try other levels, type 'menu'");
+                break;
+            case 3:
+                Terminal.WriteLine("Congratulations, you just got the right password!");
+                Terminal.WriteLine("To return to the main menu to try other levels, type 'menu'");    
+                break;
+            default:
+                Debug.Log("Invalid Level reached");
+                break;
+             
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
