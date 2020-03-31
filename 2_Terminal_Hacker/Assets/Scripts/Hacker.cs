@@ -6,19 +6,18 @@ using UnityEngine;
 public class Hacker : MonoBehaviour
 {
 
+    const string menuReminder = "To return to the main menu to try other levels, type 'menu'";
     // Game configuration data
     string[] level1Passwords = { "dbs", "instances", "elastics", "ips" };
     string[] level2Passwords = { "books", "toilet", "tables", "chairs" };
     string[] level3Passwords = { "tanjirou", "zenitsu", "inosuke", "giyuu" };
 
-
     // Game state
     int level; 
     string password;
     enum Screen { MainMenu, Password, Win}; // Define our own type
-    //enum Level { Level1, Level2, Level3 }
     Screen currentScreen;
-    //Level currentLevel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +47,11 @@ public class Hacker : MonoBehaviour
         {
             ShowMainMenu();
         }
+        else if (input == "quit" || input == "close" || input == "exit")
+        {
+            Terminal.WriteLine("If on web, just close the tab");
+            Application.Quit();
+        }
         else if (currentScreen == Screen.MainMenu)
         {
             RunMainMenu(input);
@@ -70,17 +74,15 @@ public class Hacker : MonoBehaviour
         else
         {
             Terminal.WriteLine("Please enter a valid input!");
-        }
-
-        
+        }   
     }
 
     void AskForPassword()
     {
         currentScreen = Screen.Password;
         Terminal.ClearScreen();
+        SetRandomPassword();    
         Terminal.WriteLine("Welcome to level " + level);
-        SetRandomPassword();
         Terminal.WriteLine("Enter your guess: " + password.Anagram());
     }
 
@@ -112,7 +114,7 @@ public class Hacker : MonoBehaviour
         }
         else
         {
-            Terminal.WriteLine("The input was incorrect, please try again (:");
+            AskForPassword();
         }
     }
 
@@ -121,6 +123,7 @@ public class Hacker : MonoBehaviour
         currentScreen = Screen.Win;
         Terminal.ClearScreen();
         ShowLevelReward();
+        Terminal.WriteLine(menuReminder);
     }
 
     void ShowLevelReward()
@@ -129,7 +132,6 @@ public class Hacker : MonoBehaviour
         {
             case 1:
                 Terminal.WriteLine("Congratulations, you just got the right password!");
-                Terminal.WriteLine("To return to the main menu to try other levels, type 'menu'");
                 break;
             case 2:
                 Terminal.WriteLine("Congratulations!");
@@ -141,11 +143,9 @@ public class Hacker : MonoBehaviour
  /_____ //
 (______(/
                 ");
-                Terminal.WriteLine("To return to the main menu to try other levels, type 'menu'");
                 break;
             case 3:
                 Terminal.WriteLine("Congratulations, you just got the right password!");
-                Terminal.WriteLine("To return to the main menu to try other levels, type 'menu'");    
                 break;
             default:
                 Debug.Log("Invalid Level reached");
