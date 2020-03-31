@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class Hacker : MonoBehaviour
 {
+
+    // Game configuration data
+    string[] level1Passwords = { "dbs", "instances", "elastics", "ips" };
+    string[] level2Passwords = { "books", "toilet", "tables", "chairs" };
+    string[] level3Passwords = { "tanjirou", "zenitsu", "inosuke", "giyuu" };
+
+
     // Game state
     int level; 
     string password;
@@ -54,21 +61,32 @@ public class Hacker : MonoBehaviour
 
     void RunMainMenu(string input)
     {
+
         if (input == "1")
         {
             level = 1;
-            password = "aws";
+            var random = new System.Random();
+            int index = random.Next(level1Passwords.Length);
+
+            password = level1Passwords[index];
             StartGame();
         }
         else if (input == "2")
         {
             level = 2;
-            password = "sutd";
+            var random = new System.Random();
+            int index = random.Next(level2Passwords.Length);
+
+            password = level2Passwords[index];
             StartGame();
         }
         else if (input == "3")
         {
             level = 3;
+            var random = new System.Random();
+            int index = random.Next(level3Passwords.Length);
+
+            password = level3Passwords[index];
             password = "tanjirou";
             StartGame();
         }
