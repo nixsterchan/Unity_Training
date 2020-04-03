@@ -214,12 +214,12 @@ PrefabInstance:
     - target: {fileID: 3643408455305205521, guid: 432f29c1ab04e50418b123ba33865036,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 3.16
       objectReference: {fileID: 0}
     - target: {fileID: 3643408455305205521, guid: 432f29c1ab04e50418b123ba33865036,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20
+      value: -11.32
       objectReference: {fileID: 0}
     - target: {fileID: 3643408455305205521, guid: 432f29c1ab04e50418b123ba33865036,
         type: 3}
@@ -339,6 +339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rocket Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886835996245881011, guid: 1603ff82eeca7d04fb304775a4bfe66b,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1603ff82eeca7d04fb304775a4bfe66b, type: 3}
