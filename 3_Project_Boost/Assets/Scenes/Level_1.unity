@@ -490,6 +490,11 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7141345512819149715, guid: 1603ff82eeca7d04fb304775a4bfe66b,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7141345512819149741, guid: 1603ff82eeca7d04fb304775a4bfe66b,
         type: 3}
       propertyPath: m_Name
